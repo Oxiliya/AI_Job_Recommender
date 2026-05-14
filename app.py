@@ -114,49 +114,9 @@ def load_recommender():
 # SIDEBAR
 # ──────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("## ⚙️ Konfigurasi Sistem")
-    st.divider()
-
-    # ── API Key Input ──
-    st.markdown("### 🔑 Gemini API Key")
-    api_key_input = st.text_input(
-        "Masukkan API Key",
-        type="password",
-        placeholder="AIza...",
-        help="Dapatkan dari https://aistudio.google.com/app/apikey",
-    )
-    if api_key_input:
-        os.environ["GEMINI_API_KEY"] = api_key_input
-
-    # ── Test Connection ──
-    if st.button("🔌 Test Koneksi Gemini", use_container_width=True):
-        with st.spinner("Menguji koneksi..."):
-            ok, msg = test_gemini_connection()
-            if ok:
-                st.success(f"✅ {msg}")
-                st.session_state.gemini_ready = True
-            else:
-                st.error(f"❌ {msg}")
-                st.session_state.gemini_ready = False
-
-    st.divider()
-
-    # ── Engine Status ──
-    st.markdown("### 📊 Status Sistem")
     engine, engine_ok = load_recommender()
     st.session_state.engine_ready = engine_ok
 
-    col1, col2 = st.columns(2)
-    with col1:
-        if engine_ok:
-            st.markdown('<span class="badge-online">✅ Engine</span>', unsafe_allow_html=True)
-        else:
-            st.markdown('<span class="badge-offline">❌ Engine</span>', unsafe_allow_html=True)
-    with col2:
-        if st.session_state.gemini_ready:
-            st.markdown('<span class="badge-online">✅ Gemini</span>', unsafe_allow_html=True)
-        else:
-            st.markdown('<span class="badge-offline">⚠️ Gemini</span>', unsafe_allow_html=True)
 
     if not engine_ok:
         st.warning(
@@ -165,15 +125,12 @@ with st.sidebar:
             "```\npython src/preprocess.py\n```"
         )
 
-    st.divider()
-
     # ── Stats ──
     if engine_ok:
         st.markdown("### 📈 Dataset Info")
         df_stats = engine.df
         st.metric("Total Lowongan", f"{len(df_stats):,}")
         st.metric("Kota Tersedia", df_stats["location"].nunique())
-        st.metric("Remote Jobs", f"{(df_stats['remote_option'] == 'Yes').sum():,}")
 
     st.divider()
 

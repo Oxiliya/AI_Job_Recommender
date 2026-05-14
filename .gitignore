@@ -1,0 +1,89 @@
+# ==========================================
+# Python & Environment
+# ==========================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+venv/
+env/
+.env_venv/
+.venv/
+env.bak/
+venv.bak/
+
+# ==========================================
+# Secrets & Configuration (SANGAT PENTING)
+# ==========================================
+# Karena Anda menggunakan python-dotenv dan google-generativeai, 
+# pastikan file .env (yang berisi API Key) tidak pernah di-commit.
+.env
+.env.local
+.env.*
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# ==========================================
+# Machine Learning Models & Weights
+# ==========================================
+# PyTorch & Sentence Transformers (torch, sentence-transformers)
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.bin
+
+# Scikit-learn & Serialized Objects (scikit-learn)
+*.joblib
+*.pkl
+*.pickle
+
+# Folder khusus untuk menyimpan model lokal (opsional, disarankan)
+models/
+saved_models/
+
+# ==========================================
+# Data & Datasets (pandas, numpy)
+# ==========================================
+# Mengabaikan file data agar repositori tidak membengkak
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.parquet
+*.jsonl
+
+# Folder data lokal
+data/
+datasets/
+raw_data/
+processed_data/
+
+# ==========================================
+# Jupyter Notebooks & Caches
+# ==========================================
+.ipynb_checkpoints
+.pytest_cache/
+.mypy_cache/
+
+# ==========================================
+# OS & Editor / IDE
+# ==========================================
+# Mac / Windows
+.DS_Store
+Thumbs.db
+
+# VS Code / PyCharm
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+
+models/
+job/
+.job
